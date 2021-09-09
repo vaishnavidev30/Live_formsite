@@ -24,7 +24,7 @@ function App() {
       </header> */}
       <Switch>
       <Route exact path="/"component={FormPage} />
-      <Route path="/create-form" component={FormPage} />
+      <Route path="/home" component={Home} />
     </Switch>
       </HashRouter>
   

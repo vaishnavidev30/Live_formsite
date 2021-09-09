@@ -11,7 +11,7 @@ let FormSchema = new Schema({
   Email:{
     type:String
   },
- Bio:{
+  Bio:{
    type:String
  },
   Gender:{

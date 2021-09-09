@@ -1,9 +1,12 @@
 import React, { useState } from 'react';
-import { Button ,Card} from 'react-bootstrap';
+import { Button ,Card,Toast} from 'react-bootstrap';
+import { useHistory, useParams } from 'react-router-dom';
 import { useForm, Controller } from "react-hook-form";
 import {
   EmailShareButton,
 } from "react-share";
+import axios from 'axios';
+
 
 import {
   RadioGroup,
@@ -14,22 +17,48 @@ import {
 
 export default function FormPage (props) {
   const { register, handleSubmit, control, formState: { errors } } = useForm();
-  const [result, setResult] = useState("");
-
-  const url = "https://www.facebook.com";
-
+  const history = useHistory();
+  const [loading, setLoading] = useState(false);
+  const [show, setShow] = useState(false);
+  const url = "https://vaishnavidev30.github.io/Live_formsite/";
 
   const onSubmit = (data) => {
-    alert("form submitted");
-    setResult(data)
-  console.log("result",result);
+    var formdata ={
+      Firstname: data.Firstname,
+      Lastname: data.Lastname,
+      Bio: data.Bio,
+      Email: data.Email,
+      Gender: data.Gender,
+      Courses: data.Courses
+    }
+    setLoading(true);
+    axios.post('http://localhost:4000/create-form', formdata)
+      .then(res => {
+        console.log("res",res);
+        setShow(true);
+        setTimeout(() => {
+          history.push('/home');
+          setLoading(false);
+        }, 1500);
+       
+      })
+      .catch((err) => console.log("err", err))
   }
+    
         return (
-           
+           <>
+            <Toast onClose={() => setShow(false)} show={show} delay={3000} autohide style={{
+      position: 'absolute',
+      bottom: 0,
+      marginBottom:'25px',
+      right: 0,
+      backgroundColor:'green',color:'white',
+    }}>
+        <Toast.Body>Form Successfully submited</Toast.Body>
+      </Toast>
                <Card >
                
                <form onSubmit={handleSubmit(onSubmit)}>
-        
           <label >FirstName</label>
           <input {...register("Firstname", { required: true })} placeholder="First name" />
            {errors.Firstname?.type === 'required' && <p style={{ marginBottom: '3px' }}> required</p>}
@@ -72,10 +101,8 @@ export default function FormPage (props) {
             <option value="BCA">BCA</option>
           </select>
           </div>
-          {errors.Courses?.type === 'required' && <p style={{ marginBottom: '3px' }}> required</p>}
           <label>Bio</label>
           <textarea {...register("Bio", { required: true })} placeholder="Bio" rows={3} />
-          {errors.Bio?.type === 'required' && <p style={{ marginBottom: '3px' }}>Bio name is required</p>}
           <Button type="submit" style={{ marginBottom: '20px',marginTop:'20px' ,marginRight:'15px'}}>
             Submit
           </Button>
@@ -86,6 +113,6 @@ export default function FormPage (props) {
 </Button>
         </form>
       </Card>
-           
+           </>
         )
 }

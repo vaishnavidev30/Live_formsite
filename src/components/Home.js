@@ -4,7 +4,7 @@ export default function Home() {
    
         return (
             <div>
-                <p></p>
+                <p>Thank you for response</p>
             </div>
         )
         }
