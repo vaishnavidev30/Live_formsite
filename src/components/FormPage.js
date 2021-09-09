@@ -3,8 +3,6 @@ import { Button ,Card} from 'react-bootstrap';
 import { useForm, Controller } from "react-hook-form";
 import {
   EmailShareButton,
-  EmailIcon,
-  FacebookShareButton,
 } from "react-share";
 
 import {
@@ -17,6 +15,8 @@ import {
 export default function FormPage (props) {
   const { register, handleSubmit, control, formState: { errors } } = useForm();
   const [result, setResult] = useState("");
+
+  const url = "https://www.facebook.com";
 
 
   const onSubmit = (data) => {
@@ -36,10 +36,6 @@ export default function FormPage (props) {
          <label >Lastname</label>
           <input {...register("Lastname", { required: true })} placeholder="Last name" />
            {errors.Lastname?.type === 'required' && <p style={{ marginBottom: '3px' }}> required</p>}
-         
-         
-        
-         
   <label >Email</label>
   <input type="email" {...register("Email", { required: true })} placeholder="Email" />
           {errors.Email?.type === 'required' && <p style={{ marginBottom: '3px' }}> required</p>}
@@ -84,7 +80,7 @@ export default function FormPage (props) {
             Submit
           </Button>
           <Button>
-          < EmailShareButton url={'https://accounts.google.com/b/0/AddMailService'}>
+          < EmailShareButton url={url}>
   Share via Email
 </ EmailShareButton>
 </Button>
