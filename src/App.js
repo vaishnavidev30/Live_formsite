@@ -9,9 +9,9 @@ import FormPage from './components/FormPage';
 
 function App() {
   return (
-    
+   
       <HashRouter>
-         {/* <header >
+         {/* <header   >
         <Navbar variant="light" bg="light" >
             <Nav className="justify-content-end">
               <Nav>
@@ -27,6 +27,7 @@ function App() {
       <Route path="/home" component={Home} />
     </Switch>
       </HashRouter>
+    
   
   );
 }

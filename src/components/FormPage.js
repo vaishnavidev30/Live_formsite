@@ -56,8 +56,9 @@ export default function FormPage (props) {
     }}>
         <Toast.Body>Form Successfully submited</Toast.Body>
       </Toast>
-               <Card >
-               
+                     <Card >
+               <Card.Header>Enquiry Form</Card.Header>
+               <Card.Body>
                <form onSubmit={handleSubmit(onSubmit)}>
           <label >FirstName</label>
           <input {...register("Firstname", { required: true })} placeholder="First name" />
@@ -112,6 +113,7 @@ export default function FormPage (props) {
 </ EmailShareButton>
 </Button>
         </form>
+        </Card.Body>
       </Card>
            </>
         )
